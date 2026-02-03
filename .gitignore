@@ -1,0 +1,14 @@
+env
+.env
+.env.production
+.mypy_cache
+.vscode
+__pycache__
+.pytest_cache
+test.db
+log.txt
+*.log
+Pipfile.lock
+dist
+site
+scheduler.db

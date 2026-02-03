@@ -1,0 +1,15 @@
+uvicorn==0.25.0
+SQLAlchemy==2.0.30
+gunicorn==22.0.0
+fastapi==0.108.0
+fastapi-cli==0.0.4
+fastapi-logger==0.2
+alembic==1.13.1
+boto3==1.34.130
+pydantic==2.5.3
+pydantic-settings==2.1.0
+pydantic_core==2.14.6
+python-dateutil==2.8.2
+python-dotenv==1.0.0
+python-jose==3.3.0
+virtualenv==20.25.0

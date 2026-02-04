@@ -240,3 +240,36 @@ class MemberGroupAssignmentResponse(MemberGroupAssignmentBase):
     
     class Config:
         from_attributes = True
+        
+        
+# ============================
+# LOGIN USER SCHEMA
+# ============================
+
+class LoginUserBase(BaseModel):
+    email: EmailStr | None 
+    password: str = Field(..., min_length=6) | None
+    idToken: str  = Field(..., min_length=6) | None
+
+
+# class UserCreate(UserBase):
+#     password: str
+
+
+# class UserUpdate(BaseModel):
+#     username: Optional[str] = Field(None, max_length=100)
+#     email: Optional[EmailStr] = None
+#     full_name: Optional[str] = Field(None, max_length=255)
+#     role: Optional[str] = Field(None, max_length=20)
+#     is_active: Optional[bool] = None
+#     password: Optional[str] = None
+
+
+# class UserResponse(UserBase):
+#     id: int
+#     last_login: Optional[datetime] = None
+#     created_at: datetime
+#     updated_at: Optional[datetime] = None
+    
+#     class Config:
+#         from_attributes = True

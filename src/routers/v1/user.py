@@ -21,11 +21,11 @@ def login_user(
     role: str
 ):
     with db_session() as db:
-        if action == "BY_EMAIL":
+        if action == "email":
             return UserManager(request).login_user(db, params)
-        elif action == "BY_MOBILE":
+        elif action == "mobile":
             return {"response": "login by mobile"}
-        elif action == "BY_PASSWORD":
+        elif action == "password":
             return {"response": "login by mobile"}
             
         

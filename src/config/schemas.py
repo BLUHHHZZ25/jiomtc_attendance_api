@@ -247,9 +247,9 @@ class MemberGroupAssignmentResponse(MemberGroupAssignmentBase):
 # ============================
 
 class LoginUserBase(BaseModel):
-    email: EmailStr | None 
-    password: str = Field(..., min_length=6) | None
-    idToken: str  = Field(..., min_length=6) | None
+    email: EmailStr | None = None 
+    password: str | None = Field(None, min_length=6) 
+    idToken: str | None  = Field(None, min_length=6) 
 
 
 # class UserCreate(UserBase):

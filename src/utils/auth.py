@@ -1,6 +1,4 @@
 from fastapi import HTTPException, status
-import hashlib
-import math
 import random
 import uuid
 import bcrypt

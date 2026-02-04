@@ -3,7 +3,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     DATABASE_URL: str | None = None
-
+    CORS_ORIGINS: list[str] = ["*"]
     
     class Config:
         env_file = ".env"

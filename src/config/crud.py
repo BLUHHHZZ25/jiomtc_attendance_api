@@ -1,5 +1,6 @@
 from config import models
 from config.log import logger as fastapi_logger
+from utils.auth import Auth
 class User:
     @staticmethod
     def get(db, params):
@@ -16,17 +17,18 @@ class User:
     def create(db, params):
         try:
             create_user = models.User(
-                username=params.username,
-                email=params.email,
-                password_hash=params.password_hash,
-                full_name=params.full_name,
-                role=params.role
+                username=params['username'],
+                email=params['email'],
+                password_hash=params['password'],
+                full_name=params['full_name'],
+                role=params['role']
             )
+            fastapi_logger.info(f" params password {params['password']} -- type {(type(params['password']))}")
             db.add(create_user)
             db.commit()
             db.refresh(create_user)
             
-            return 
+            return create_user
         except Exception as ex:
             fastapi_logger.error(f"User.create is failed: {str(ex)}")
             raise Exception(f"DB Error: {str(ex)}")

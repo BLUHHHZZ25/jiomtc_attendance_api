@@ -28,12 +28,11 @@ def login_user(
         elif action == "password":
             return {"response": "login by mobile"}
         
-@router.post("/signup/{action}/{role}")
+@router.post("/signup/{action}")
 def singup(
     request: Request,
     params: SignUpBase, 
-    action: str, 
-    role: str
+    action: str
 ):
     with db_session() as db:
         if action == "email":

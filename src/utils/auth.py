@@ -47,7 +47,8 @@ class Auth:
         password_bytes = password.encode('utf-8')
         salt = bcrypt.gensalt()
         hashed_password = bcrypt.hashpw(password=password_bytes, salt=salt)
-        return hashed_password
+        fastapi_logger.info(f"password verify_password {password_bytes} - {hashed_password}")
+        return hashed_password.decode('utf-8') 
 
     @staticmethod
     def verify_password(password, hashed_password):

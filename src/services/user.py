@@ -7,8 +7,8 @@ class UserService:
         return User.get(db, params)
     
     @staticmethod
-    def put(db, params):
-        return User.put(db, params)
+    def create(db, params):
+        return User.create(db, params)
     
     @staticmethod
     def post(db, params):

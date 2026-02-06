@@ -251,18 +251,13 @@ class LoginUserBase(BaseModel):
     password: str | None = Field(None, min_length=6) 
     idToken: str | None  = Field(None, min_length=6) 
 
-
-# class UserCreate(UserBase):
-#     password: str
-
-
-# class UserUpdate(BaseModel):
-#     username: Optional[str] = Field(None, max_length=100)
-#     email: Optional[EmailStr] = None
-#     full_name: Optional[str] = Field(None, max_length=255)
-#     role: Optional[str] = Field(None, max_length=20)
-#     is_active: Optional[bool] = None
-#     password: Optional[str] = None
+class SignUpBase(BaseModel):
+    username: Optional[str] = Field(None, max_length=100)
+    email: Optional[EmailStr] = None
+    full_name: Optional[str] = Field(None, max_length=255)
+    role: Optional[str] = Field(None, max_length=20)
+    is_active: Optional[bool] = None
+    password: Optional[str] = None
 
 
 # class UserResponse(UserBase):

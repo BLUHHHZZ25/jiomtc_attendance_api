@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Request
-from config.schemas import MemberBase, LoginUserBase
+from config.schemas import MemberBase, LoginUserBase, SignUpBase
 from config.database import get_db, db_session
 from managers.user import UserManager
 
@@ -23,6 +23,21 @@ def login_user(
     with db_session() as db:
         if action == "email":
             return UserManager(request).login_user(db, params)
+        elif action == "mobile":
+            return {"response": "login by mobile"}
+        elif action == "password":
+            return {"response": "login by mobile"}
+        
+@router.post("/signup/{action}/{role}")
+def singup(
+    request: Request,
+    params: SignUpBase, 
+    action: str, 
+    role: str
+):
+    with db_session() as db:
+        if action == "email":
+            return UserManager(request).signup_via_email(db, params)
         elif action == "mobile":
             return {"response": "login by mobile"}
         elif action == "password":

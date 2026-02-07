@@ -13,12 +13,11 @@ router = APIRouter(
 def get_users():
     return {"message": "List of users"}
 
-@router.post("/login/{action}/{role}")
+@router.post("/login/{action}")
 def login_user(
     request: Request,
     params: LoginUserBase, 
-    action: str, 
-    role: str
+    action: str
 ):
     with db_session() as db:
         if action == "email":

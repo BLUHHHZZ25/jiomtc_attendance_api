@@ -81,6 +81,7 @@ class UserResponse(UserBase):
 # SERVICE SCHEMAS
 # ============================
 class ServiceBase(BaseModel):
+    id: int = None
     service_name: str = Field(..., max_length=255)
     service_type: str = Field(..., max_length=50)
     description: Optional[str] = None

@@ -1,7 +1,7 @@
 from typing import Union
 import uvicorn
 from fastapi import FastAPI
-from routers.v1 import user, attendance, members
+from routers.v1 import user, attendance, members, services
 from config_setting import setting
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -9,6 +9,7 @@ app = FastAPI()
 app.include_router(user.router)
 app.include_router(attendance.router)
 app.include_router(members.router)
+app.include_router(services.router)
 
 origins = setting.CORS_ORIGINS
 app.add_middleware(

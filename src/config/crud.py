@@ -146,8 +146,7 @@ class Services:
                 description=params['description'],
                 default_day_of_week=params['default_day_of_week'],
                 default_time=params['default_time'],
-                is_active=params['is_active'],
-                date_of_birth=params['date_of_birth'],
+                is_active=params['is_active']
             )
 
             db.add(create_services)
@@ -175,8 +174,7 @@ class Services:
                     services_data.description=params['description'],
                     services_data.default_day_of_week=params['default_day_of_week'],
                     services_data.default_time=params['default_time'],
-                    services_data.is_active=params['is_active'],
-                    services_data.date_of_birth=params['date_of_birth'],
+                    services_data.is_active=params['is_active']
 
                 
             db.add(services_data)

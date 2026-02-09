@@ -92,7 +92,7 @@ class Member:
             
     def update(db, params):
         try:
-            member_data = db.query(models.Member).filter(models.Member.id == params['id']).first()
+            member_data = db.query(models.Member).filter(models.Member.email == params['email']).first()
 
             if not member_data:
                 raise Exception(f"Account not found")
@@ -101,7 +101,7 @@ class Member:
                 action = params['action_type']
                 if action == "UPDATE_PROFILE":
                     member_data.name=params['name'],
-                    member_data.email=params['email'],
+                    # member_data.email=params['email'],
                     member_data.phone=params['phone'],
                     member_data.join_date=params['join_date'],
                     member_data.status=params['status'],

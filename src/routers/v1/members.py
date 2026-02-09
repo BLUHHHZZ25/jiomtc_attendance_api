@@ -10,11 +10,18 @@ router = APIRouter(
 
 
 @router.post("/create")
-def login_user(
+def memeber_create(
     request: Request,
-    params: LoginUserBase, 
-    action: str
+    params: MemberBase, 
 ):
     with db_session() as db:
         return MembersManager(request).create(db, params)
+
+@router.put("/update")
+def memeber_create(
+    request: Request,
+    params: MemberBase, 
+):
+    with db_session() as db:
+        return MembersManager(request).update(db, params)
         

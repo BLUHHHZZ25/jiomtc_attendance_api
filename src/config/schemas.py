@@ -20,10 +20,6 @@ class MemberBase(BaseModel):
     notes: Optional[str] = None
 
 
-class MemberCreate(MemberBase):
-    pass
-
-
 class MemberUpdate(BaseModel):
     name: Optional[str] = Field(None, max_length=255)
     email: Optional[EmailStr] = None
@@ -38,13 +34,13 @@ class MemberUpdate(BaseModel):
     notes: Optional[str] = None
 
 
-class MemberResponse(MemberBase):
-    id: int
-    created_at: datetime
-    updated_at: Optional[datetime] = None
+# class MemberResponse(MemberBase):
+#     id: int
+#     created_at: datetime
+#     updated_at: Optional[datetime] = None
     
-    class Config:
-        from_attributes = True
+#     class Config:
+#         from_attributes = True
 
 
 # ============================
@@ -259,12 +255,15 @@ class SignUpBase(BaseModel):
     is_active: Optional[bool] = None
     password: Optional[str] = None
 
-
-# class UserResponse(UserBase):
-#     id: int
-#     last_login: Optional[datetime] = None
-#     created_at: datetime
-#     updated_at: Optional[datetime] = None
-    
-#     class Config:
-#         from_attributes = True
+# class MemberBase(BaseModel):
+#     name: Optional[str] = Field(..., max_length=255)
+#     email: Optional[EmailStr] = Field(None, max_length=255)
+#     phone: Optional[str] = Field(None, max_length=20)
+#     join_data: Optional[date] = None
+#     status: Optional[str] = Field(None, max_length=20)
+#     address: Optional[str] = None
+#     date_of_birth: Optional[date] = None
+#     gender: Optional[str] = None
+#     emergency_contact_name: Optional[str] = None
+#     emergeny_contact_number: Optional[str] = None
+#     notes: Optional[str] = None

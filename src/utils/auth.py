@@ -200,7 +200,7 @@ class Auth:
             }
         except Exception as ex:
             fastapi_logger.error(f"Auth.validate_token: {str(ex)}")
-            # raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
 
     def validate_refresh(self):
         authorized = True

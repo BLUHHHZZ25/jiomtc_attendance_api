@@ -1,11 +1,24 @@
 from services.user import UserService
 from config.log import logger as fastapi_logger
-from utils.auth import Auth
+from utils.auth import Auth, JwtService
 class UserManager:
     def __init__(self, request):
         self.request = request
+    
+    def init_auth(self, type):
+        app_info = {
+            'authorized': False
+        }
+        if( type == "ACCESS_TOKEN"):
+            app_info=Auth(self.request).validate_token()
+        else:
+            app_info= Auth(self.request).validate_signup()
+            
+        return app_info
+    
         
     def login_user(self, db, params):
+        # init_auth = self.init_auth("ACCESS_TOKEN")
         try:
             account = UserService.get(db, {"email":params.email, "action_type":"BY_EMAIL"})
 
@@ -20,7 +33,17 @@ class UserManager:
             if not account or not Auth.verify_password(params.password, account.password_hash):
                 fastapi_logger.info(f"User Login Failed: Incorrect password for email {params.email}")
                 return {"response": "Invalid email or password"}
-            return {"response": "200 OK"}
+            
+            access_token = JwtService().encode({}, {"user_id": account.id, "email": account.email})
+            
+            refresh_token = JwtService().encode({"token_type":'REFRESH'}, {"user_id": account.id, "email": account.email})
+            
+            
+            return {
+                    "response": "200 OK",
+                    "access_token": access_token,
+                    "refresh_token": refresh_token
+                }
         except Exception as ex:
             fastapi_logger.error(f"UserManager.login_user is failed: {str(ex)} - email: {params.email}")
             raise Exception(f"Login Error: {str(ex)}")

@@ -10,7 +10,8 @@ from config.log import logger as fastapi_logger
 
 
 class JwtService:
-    ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24   # 30 minutes
+    # ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24   # 30 minutes
+    ACCESS_TOKEN_EXPIRE_MINUTES = 5   # 30 minutes
     REFRESH_TOKEN_EXPIRE_MINUTES = 60 * 24 * 10 # 10 days | forever login
     ALGORITHM = "HS256"
 

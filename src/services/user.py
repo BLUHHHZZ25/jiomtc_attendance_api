@@ -13,3 +13,4 @@ class UserService:
     @staticmethod
     def post(db, params):
         return User.post(db, params)
+    

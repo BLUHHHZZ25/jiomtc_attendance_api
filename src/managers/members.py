@@ -1,6 +1,8 @@
 
-from utils.auth import Auth, JwtServices
-class AttendanceManager:
+from utils.auth import Auth, JwtService
+from config.log import logger as fastapi_logger
+
+class MembersManager:
     def __init__(self, request):
         self.request = request
         
@@ -15,3 +17,9 @@ class AttendanceManager:
             
         return app_info
     
+    def create(self, db, params):
+        try:
+            return {"response": {}}
+        except Exception as ex:
+            fastapi_logger.error(f"UserManager.login_user is failed: {str(ex)} ")
+            raise Exception(f"Login Error: {str(ex)}")

@@ -162,13 +162,6 @@ class Auth:
         authorized = False
 
         try:
-            app_name = self.request.headers.get("z-app")
-            app_type = self.request.headers.get("z-app-type")
-            app_version = self.request.headers.get("z-app-version")
-            app_code = self.request.headers.get("z-app-code")
-            app_key = self.request.headers.get("z-app-key")
-            app_secret = self.request.headers.get("z-app-secret")
-            uuid = self.request.headers.get("uuid") # device_id
             authorization = self.request.headers.get("Authorization")
 
             client_host = self.request.client.host
@@ -177,10 +170,9 @@ class Auth:
             client_ip = forwarded_for or real_ip or client_host
             # decoded_jwt = None
 
-
-            # return "hello"
-            if not app_name or not app_type or not app_version or not app_code or not client_ip or not uuid :
-                raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorfddfized")
+            if not client_ip or not uuid :
+                fastapi_logger.error(f"Auth.validate_token: Missing Header")
+                raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
             
             if authorization.startswith('Bearer'):
                 jwt_token = authorization[7:]
@@ -190,10 +182,6 @@ class Auth:
             authorized = True
             return {
                 "authorized": authorized,
-                "app_name": app_name,
-                "app_type": app_type,
-                "app_version": app_version,
-                "app_code": app_code,
                 "client_ip": client_ip,
                 "uuid": uuid,
                 "decoded_jwt": decoded_jwt

@@ -40,5 +40,12 @@ def singup(
             return {"response": "login by mobile"}
         elif action == "password":
             return {"response": "login by mobile"}
+        
+@router.post("/check")
+def check(
+    request: Request,
+):
+    with db_session() as db:
+        return UserManager(request).check()
             
         

@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from services.user import UserService
 from config.log import logger as fastapi_logger
 from utils.auth import Auth, JwtService
@@ -18,16 +19,17 @@ class UserManager:
     
         
     def login_user(self, db, params):
-        try:
-            account = UserService.get(db, {"email":params.email, "action_type":"BY_EMAIL"})
+        account = UserService.get(db, {"email":params.email, "action_type":"BY_EMAIL"})
 
-            if account is None:
-                fastapi_logger.info(f"User Login Failed: No account found for email {params.email}")
-                return {"response": "Invalid email or password"}
-            
-            if account.is_active == False:
-                fastapi_logger.info(f"User Login Failed: Account is not active {params.email}")
-                return {"response": "Account is not active"}
+        if account is None:
+            fastapi_logger.info(f"User Login Failed: No account found for email {params.email}")
+            raise HTTPException(status_code=401, detail="Invalid email or password")
+        
+        if account.is_active == False:
+            fastapi_logger.info(f"User Login Failed: Account is not active {params.email}")
+            raise HTTPException(status_code=401, detail="Account is not active")
+        
+        try:
             
             if not account or not Auth.verify_password(params.password, account.password_hash):
                 fastapi_logger.info(f"User Login Failed: Incorrect password for email {params.email}")

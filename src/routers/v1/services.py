@@ -10,7 +10,7 @@ router = APIRouter(
 
 
 @router.post("/create")
-def memeber_create(
+def service_create(
     request: Request,
     params: ServiceBase, 
 ):
@@ -18,7 +18,7 @@ def memeber_create(
         return ServicesManager(request).create(db, params)
 
 @router.put("/update")
-def memeber_create(
+def service_update(
     request: Request,
     params: ServiceBase, 
 ):

@@ -7,6 +7,6 @@ router = APIRouter(
 )
 
 
-@router.get("/")
-def get_users():
-    return {"message": "List of attendance records"}
+# @router.get("/")
+# def get_users():
+#     return {"message": "List of attendance records"}

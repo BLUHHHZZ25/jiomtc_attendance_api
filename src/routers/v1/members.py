@@ -18,7 +18,7 @@ def memeber_create(
         return MembersManager(request).create(db, params)
 
 @router.put("/update")
-def memeber_create(
+def member_update(
     request: Request,
     params: MemberBase, 
 ):

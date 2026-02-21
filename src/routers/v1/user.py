@@ -17,7 +17,7 @@ def get_users():
 def login_user(
     request: Request,
     params: LoginUserBase, 
-    action: str
+    action: str 
 ):
     with db_session() as db:
         if action == "email":

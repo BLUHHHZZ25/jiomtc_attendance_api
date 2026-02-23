@@ -19,6 +19,34 @@ class MembersManager:
             
         return app_info
     
+    def get(self, db, params):
+        if not params.action:
+            fastapi_logger.info(f"Member Get Failed: Params Action is Null")
+            raise HTTPException(detail="Params Action is null", status_code=500)
+        
+        if params.action == "BY_EMAIL":
+            member_data = MembersService().get(db, {"action_type": "BY_EMAIL", "email": params.email})
+        elif params.action == "BY_ID":
+            member_data = MembersService().get(db, {"action_type": "BY_ID"})
+        elif params.action == "BY_ALL":
+            member_data = MembersService().get(db, {"action_type": "BY_ALL"})
+
+        if not member_data:
+            fastapi_logger.info(f"Member not fount")
+            raise HTTPException(detail="Member not found", status_code=404)
+        try:
+             
+            return {
+                    "response": "200",
+                    "message": "Member Get Successfully",
+                    "memeber_id": member_data.id,
+                    "data": member_data
+            }
+        
+        except Exception as ex:
+            fastapi_logger.error(f"MemberManager.get is failed: {str(ex)} ")
+            raise Exception(f"Member Manager.get Error: {str(ex)}")
+    
     def create(self, db, params):
         try:
             member_data = MembersService().get(db, {"email":params.email, "action_type": "BY_EMAIL"})

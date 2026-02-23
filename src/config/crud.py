@@ -59,6 +59,8 @@ class Member:
                     return db.query(models.Member).filter(models.Member.email == params['email']).first()
                 elif action == 'BY_ID':
                     return db.query(models.Member).filter(models.Member.id == params['id']).first()
+                elif action == 'BY_ALL':
+                    return db.query(models.Member).all()
                 return {"No Type Found"}
         except Exception as ex:
             fastapi_logger.error(f"Member.get is failed: {str(ex)} - action_type: {params['action_type']}")

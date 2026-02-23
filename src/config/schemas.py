@@ -34,6 +34,12 @@ class MemberUpdate(BaseModel):
     notes: Optional[str] = None
 
 
+class MemberGet(BaseModel):
+    action: Optional[str] = Field(None, max_length=255)
+    email: Optional[EmailStr] = None
+
+
+
 # class MemberResponse(MemberBase):
 #     id: int
 #     created_at: datetime

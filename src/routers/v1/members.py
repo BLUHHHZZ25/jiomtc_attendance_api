@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Request
-from config.schemas import MemberBase, LoginUserBase, SignUpBase
+from config.schemas import MemberBase, LoginUserBase, MemberGet, SignUpBase
 from config.database import get_db, db_session
 from managers.members import MembersManager 
 
@@ -8,7 +8,14 @@ router = APIRouter(
     tags=['members'],
 )
 
-
+@router.get("/get")
+def memeber_get(
+    request: Request,
+    params: MemberGet
+):
+    with db_session() as db:
+        return MembersManager(request).get(db,params)
+    
 @router.post("/create")
 def memeber_create(
     request: Request,

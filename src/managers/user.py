@@ -43,7 +43,9 @@ class UserManager:
             return {
                     "response": "200 OK",
                     "access_token": access_token,
-                    "refresh_token": refresh_token
+                    "refresh_token": refresh_token,
+                    "email": account.email,
+                    "name": account.full_name
                 }
         except Exception as ex:
             fastapi_logger.error(f"UserManager.login_user is failed: {str(ex)} - email: {params.email}")

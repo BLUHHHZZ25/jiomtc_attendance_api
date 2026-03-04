@@ -39,7 +39,7 @@ class MembersManager:
             return {
                     "response": "200",
                     "message": "Member Get Successfully",
-                    "memeber_id": member_data.id,
+                    # "memeber_id": member_data.id,
                     "data": member_data
             }
         

@@ -9,10 +9,8 @@ router = APIRouter(
 )
 
 @router.get("/")
-def health_test(
-    request: Request,
-):
-    return ['Ministry Endpint']
+def get_ministy():
+    return {"message": "List of ministry"}
 
 @router.get("/get")
 def memeber_get(

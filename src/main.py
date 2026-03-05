@@ -19,7 +19,8 @@ app.add_middleware(
         'http://localhost:3000',
         'https://murrzzz.xyz',
         'https://api.murrzzz.xyz',
-        'https://jiomtc.murrzzz.xyz'
+        'https://jiomtc.murrzzz.xyz',
+        'jiomtc-attendance-git-master-roger-moore-sangols-projects.vercel.app'
     ],
     allow_credentials=True,
     allow_methods=["*"],

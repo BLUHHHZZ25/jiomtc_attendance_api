@@ -15,7 +15,12 @@ origins = setting.CORS_ORIGINS
 app.add_middleware(
     CORSMiddleware,
     # allow_origins=origins,
-    allow_origins=['http://localhost:3000'],
+    allow_origins=[
+        'http://localhost:3000',
+        'https://murrzzz.xyz',
+        'https://api.murrzzz.xyz',
+        'https://jiomtc.murrzzz.xyz'
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

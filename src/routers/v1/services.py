@@ -8,6 +8,12 @@ router = APIRouter(
     tags=['services'],
 )
 
+@router.get("/")
+def health_test(
+    request: Request,
+):
+    return ['Services Endpint']
+
 @router.get("/get")
 def service_create(
     request: Request,

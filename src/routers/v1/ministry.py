@@ -8,6 +8,12 @@ router = APIRouter(
     tags=['ministry'],
 )
 
+@router.get("/")
+def health_test(
+    request: Request,
+):
+    return ['Ministry Endpint']
+
 @router.get("/get")
 def memeber_get(
     request: Request,

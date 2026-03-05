@@ -123,6 +123,7 @@ class MemberGroup(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     group_name = Column(String(255), nullable=False)
+    type = Column(String(50), nullable=True)
     description = Column(Text)
     leader_id = Column(Integer, ForeignKey('members.id'), index=True)
     is_active = Column(Boolean, default=True, index=True)

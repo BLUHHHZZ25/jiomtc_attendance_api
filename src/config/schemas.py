@@ -87,13 +87,15 @@ class UserResponse(UserBase):
 # SERVICE SCHEMAS
 # ============================
 class ServiceBase(BaseModel):
-    id: int = None
     service_name: str = Field(..., max_length=255)
     service_type: str = Field(..., max_length=50)
     description: Optional[str] = None
     default_day_of_week: Optional[str] = Field(None, max_length=10)
     default_time: Optional[time] = None
     is_active: bool = True
+
+class ServiceParams(BaseModel):
+    action: Optional[str] = None
 
 
 class ServiceCreate(ServiceBase):

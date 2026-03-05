@@ -19,11 +19,38 @@ class ServicesManager:
             
         return app_info
     
+    def get(self, db, params):
+        if not params.action:
+            fastapi_logger.info(f"Service Get Failed: Params Action is Null")
+            raise HTTPException(detail="Params Action is null", status_code=500)
+        
+        if params.action == "BY_SERVICE_NAME":
+            member_data = ServicesService().get(db, {"action_type": "BY_EMAIL", "email": params.service_name})
+        elif params.action == "BY_ID":
+            member_data = ServicesService().get(db, {"action_type": "BY_ID"})
+        elif params.action == "BY_ALL":
+            member_data = ServicesService().get(db, {"action_type": "BY_ALL"})
+
+        if not member_data:
+            fastapi_logger.info(f"Services not fount")
+            raise HTTPException(detail="Services not found", status_code=404)
+        try:
+             
+            return {
+                    "response": "200",
+                    "message": "Services Get Successfully",
+                    "data": member_data
+            }
+        
+        except Exception as ex:
+            fastapi_logger.error(f"ServiceManager.get is failed: {str(ex)} ")
+            raise Exception(f"Service Manager.get Error: {str(ex)}")
+
     def create(self, db, params):
         services_data = ServicesService().get(db, {"service_name":params.service_name, "action_type": "BY_SERVICE_NAME"})
         
         if services_data and services_data.service_name == params.service_name:
-            fastapi_logger.info(f"Member Creation Failed: Services is Already Exists {params.service_name}")
+            fastapi_logger.info(f"Services Creation Failed: Services is Already Exists {params.service_name}")
             raise HTTPException(detail="Service is Already Exists", status_code=400)
         try:
                 
@@ -43,8 +70,8 @@ class ServicesManager:
                     "memeber_id": create_memeber.id
             }
         except Exception as ex:
-            fastapi_logger.error(f"MemberManager.create is failed: {str(ex)} ")
-            raise Exception(f"Login Error: {str(ex)}")
+            fastapi_logger.error(f"ServicesManager.create is failed: {str(ex)} ")
+            raise Exception(f"ServicesManager Error: {str(ex)}")
         
         
     def update(self, db, params):
@@ -58,7 +85,6 @@ class ServicesManager:
                 
             update_member = ServicesService().update(db, {
                     "action_type": "UPDATE_SERVICES",
-                    "id": params.id,
                     "service_name": params.service_name,
                     "service_type": params.service_type,
                     "description": params.description,
@@ -70,9 +96,8 @@ class ServicesManager:
              
             return {
                     "response": "200",
-                    "message": "Member Updated Successfully",
-                    "memeber_id": update_member.id
+                    "message": "Services Updated Successfully",
             }
         except Exception as ex:
-            fastapi_logger.error(f"MemberManager.login_user is failed: {str(ex)} ")
-            raise Exception(f"Login Error: {str(ex)}")
+            fastapi_logger.error(f"ServiceManager.login_user is failed: {str(ex)} ")
+            raise Exception(f"ServiceManager Error: {str(ex)}")

@@ -135,6 +135,8 @@ class Services:
                     return db.query(models.Service).filter(models.Service.service_name == params['service_name']).first()
                 elif action == 'BY_ID':
                     return db.query(models.Service).filter(models.Service.id == params['id']).first()
+                elif action == "BY_ALL":
+                    return db.query(models.Service).all()
                 return {"No Type Found"}
         except Exception as ex:
             fastapi_logger.error(f"Service.get is failed: {str(ex)} - action_type: {params['action_type']}")
@@ -163,7 +165,7 @@ class Services:
             
     def update(db, params):
         try:
-            services_data = db.query(models.Service).filter(models.Service.id == params['id']).first()
+            services_data = db.query(models.Service).filter(models.Service.service_name == params['service_name']).first()
 
             if not services_data:
                 raise Exception(f"Account not found")

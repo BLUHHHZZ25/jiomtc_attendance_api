@@ -1,36 +1,7 @@
-# name: CI/CD Pipeline
-# # this is change
-# on:
-#   push:
-#     branches: [ main ]
-
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3
-
-#       - name: Deploy to home server
-#         uses: appleboy/ssh-action@master
-#         with:
-#           host: ${{ secrets.SERVER_HOST }}
-#           username: ${{ secrets.SERVER_USER }}
-#           key: ${{ secrets.SERVER_SSH_KEY }}
-#           script: |
-#             cd /home/${{ secrets.SERVER_USER }}/projects/jiomtc-attendance-api
-#             git pull origin main
-#             docker-compose down
-#             docker-compose up --build -d
-
-
 name: CI/CD Pipeline
-
 on:
   push:
     branches: [ main ]
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -45,11 +16,10 @@ jobs:
           sudo mv cloudflared /usr/local/bin/
 
       - name: Deploy to home server
-        # run: |
-        #   mkdir -p ~/.ssh
-        #   echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
-        #   chmod 600 ~/.ssh/id_rsa
-        run:
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
           ssh -o StrictHostKeyChecking=no \
               -o ProxyCommand="cloudflared access ssh --hostname %h" \
               ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} \

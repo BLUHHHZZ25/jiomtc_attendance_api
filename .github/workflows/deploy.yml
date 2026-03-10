@@ -23,7 +23,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no \
               -o ProxyCommand="cloudflared access ssh --hostname %h" \
               ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} \
-              "cd /home/${{ secrets.SERVER_USER }}/projects/jiomtc-attendance-api && \
+              "cd /home/${{ secrets.SERVER_USER }}/jiomtc-attendance-api && \
                git pull origin main && \
                docker-compose down && \
                docker-compose up --build -d"

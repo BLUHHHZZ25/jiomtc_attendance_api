@@ -25,5 +25,5 @@ jobs:
               ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} \
               "cd /home/${{ secrets.SERVER_USER }}/jiomtc_attendance_api && \
                git pull origin main && \
-               docker-compose down && \
-               docker-compose up --build -d"
+               docker compose down && \
+               docker compose up --build -d"
